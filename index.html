@@ -376,12 +376,129 @@
   <section id="about">
     <div class="about-grid">
       <div class="about-portrait reveal">
-        <div class="portrait-placeholder">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-          </svg>
-          <span>您的照片</span>
-        </div>
+        <svg viewBox="0 0 320 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+          <defs>
+            <radialGradient id="bgGrad" cx="50%" cy="60%" r="55%">
+              <stop offset="0%" stop-color="#2a1f0e"/>
+              <stop offset="100%" stop-color="#0d0d0d"/>
+            </radialGradient>
+            <radialGradient id="skinGrad" cx="50%" cy="40%" r="55%">
+              <stop offset="0%" stop-color="#f5d9b8"/>
+              <stop offset="100%" stop-color="#e8c49a"/>
+            </radialGradient>
+            <radialGradient id="cheekGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f0a0a0" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#f0a0a0" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="hairGrad" cx="50%" cy="30%" r="60%">
+              <stop offset="0%" stop-color="#3d2a1a"/>
+              <stop offset="100%" stop-color="#1a0f07"/>
+            </radialGradient>
+            <clipPath id="avatarClip">
+              <rect width="320" height="400" rx="4"/>
+            </clipPath>
+          </defs>
+
+          <g clip-path="url(#avatarClip)">
+            <!-- Background -->
+            <rect width="320" height="400" fill="url(#bgGrad)"/>
+            <!-- Subtle grid pattern -->
+            <line x1="160" y1="0" x2="160" y2="400" stroke="#c9a84c" stroke-opacity="0.06" stroke-width="1"/>
+            <line x1="0" y1="200" x2="320" y2="200" stroke="#c9a84c" stroke-opacity="0.06" stroke-width="1"/>
+            <!-- Gold corner accents -->
+            <polyline points="20,20 20,40 40,40" fill="none" stroke="#c9a84c" stroke-opacity="0.5" stroke-width="1.2"/>
+            <polyline points="300,20 300,40 280,40" fill="none" stroke="#c9a84c" stroke-opacity="0.5" stroke-width="1.2"/>
+            <polyline points="20,380 20,360 40,360" fill="none" stroke="#c9a84c" stroke-opacity="0.5" stroke-width="1.2"/>
+            <polyline points="300,380 300,360 280,360" fill="none" stroke="#c9a84c" stroke-opacity="0.5" stroke-width="1.2"/>
+
+            <!-- Neck -->
+            <rect x="143" y="250" width="34" height="42" rx="8" fill="url(#skinGrad)"/>
+
+            <!-- Shoulder / body -->
+            <ellipse cx="160" cy="360" rx="90" ry="60" fill="#1c1209"/>
+            <!-- Collar detail -->
+            <path d="M125 310 Q160 330 195 310 L200 360 Q160 345 120 360 Z" fill="#241808"/>
+            <path d="M143 290 L152 315 L160 308 L168 315 L177 290" fill="none" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.7"/>
+
+            <!-- Hair back layer -->
+            <ellipse cx="160" cy="175" rx="82" ry="90" fill="url(#hairGrad)"/>
+            <!-- Long hair strands left -->
+            <path d="M80 185 Q55 240 65 310 Q72 340 85 355" fill="none" stroke="#2a1a0a" stroke-width="18" stroke-linecap="round"/>
+            <path d="M82 190 Q58 245 68 315" fill="none" stroke="#3d2a1a" stroke-width="8" stroke-linecap="round"/>
+            <!-- Long hair strands right -->
+            <path d="M240 185 Q265 240 255 310 Q248 340 235 355" fill="none" stroke="#2a1a0a" stroke-width="18" stroke-linecap="round"/>
+            <path d="M238 190 Q262 245 252 315" fill="none" stroke="#3d2a1a" stroke-width="8" stroke-linecap="round"/>
+
+            <!-- Face -->
+            <ellipse cx="160" cy="195" rx="70" ry="78" fill="url(#skinGrad)"/>
+
+            <!-- Hair top / bangs -->
+            <path d="M90 160 Q95 100 160 90 Q225 100 230 160 Q210 130 160 125 Q110 130 90 160 Z" fill="url(#hairGrad)"/>
+            <!-- Bangs fringe -->
+            <path d="M95 162 Q108 138 125 145 Q118 158 115 170" fill="#2a1a0a"/>
+            <path d="M110 148 Q125 128 148 138 Q140 155 136 168" fill="#221408"/>
+            <path d="M225 162 Q212 138 195 145 Q202 158 205 170" fill="#2a1a0a"/>
+            <!-- Hair highlight -->
+            <path d="M130 100 Q160 88 185 100" fill="none" stroke="#6b4a2a" stroke-width="3" stroke-opacity="0.5" stroke-linecap="round"/>
+
+            <!-- Ears -->
+            <ellipse cx="90" cy="200" rx="9" ry="11" fill="#e8c49a"/>
+            <ellipse cx="90" cy="200" rx="5" ry="7" fill="#d4a882"/>
+            <ellipse cx="230" cy="200" rx="9" ry="11" fill="#e8c49a"/>
+            <ellipse cx="230" cy="200" rx="5" ry="7" fill="#d4a882"/>
+
+            <!-- Eyebrows -->
+            <path d="M128 170 Q140 165 152 168" fill="none" stroke="#3d2010" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M168 168 Q180 165 192 170" fill="none" stroke="#3d2010" stroke-width="2.5" stroke-linecap="round"/>
+
+            <!-- Eyes -->
+            <!-- Left eye -->
+            <ellipse cx="140" cy="190" rx="16" ry="13" fill="#fff" opacity="0.95"/>
+            <ellipse cx="140" cy="192" rx="10" ry="11" fill="#3d2a1a"/>
+            <ellipse cx="140" cy="192" rx="7" ry="8" fill="#1a0f06"/>
+            <ellipse cx="143" cy="188" rx="3" ry="3" fill="#fff" opacity="0.9"/>
+            <ellipse cx="136" cy="194" rx="1.5" ry="1.5" fill="#fff" opacity="0.5"/>
+            <!-- Eyelashes left -->
+            <path d="M124 186 Q126 182 128 183" fill="none" stroke="#1a0f06" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M127 182 Q129 178 132 180" fill="none" stroke="#1a0f06" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M152 184 Q154 180 156 182" fill="none" stroke="#1a0f06" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Right eye -->
+            <ellipse cx="180" cy="190" rx="16" ry="13" fill="#fff" opacity="0.95"/>
+            <ellipse cx="180" cy="192" rx="10" ry="11" fill="#3d2a1a"/>
+            <ellipse cx="180" cy="192" rx="7" ry="8" fill="#1a0f06"/>
+            <ellipse cx="183" cy="188" rx="3" ry="3" fill="#fff" opacity="0.9"/>
+            <ellipse cx="176" cy="194" rx="1.5" ry="1.5" fill="#fff" opacity="0.5"/>
+            <!-- Eyelashes right -->
+            <path d="M164 184 Q162 180 165 181" fill="none" stroke="#1a0f06" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M193 184 Q195 180 198 182" fill="none" stroke="#1a0f06" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M196 182 Q198 178 201 180" fill="none" stroke="#1a0f06" stroke-width="1.5" stroke-linecap="round"/>
+
+            <!-- Upper eyelid lines -->
+            <path d="M124 185 Q140 178 156 185" fill="none" stroke="#2a1a0a" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M164 185 Q180 178 196 185" fill="none" stroke="#2a1a0a" stroke-width="1.8" stroke-linecap="round"/>
+
+            <!-- Nose -->
+            <path d="M157 210 Q160 218 163 210" fill="none" stroke="#c8906a" stroke-width="1.5" stroke-linecap="round"/>
+            <ellipse cx="155" cy="217" rx="3" ry="2" fill="#c8906a" opacity="0.4"/>
+            <ellipse cx="165" cy="217" rx="3" ry="2" fill="#c8906a" opacity="0.4"/>
+
+            <!-- Cheeks blush -->
+            <ellipse cx="115" cy="215" rx="18" ry="10" fill="url(#cheekGrad)"/>
+            <ellipse cx="205" cy="215" rx="18" ry="10" fill="url(#cheekGrad)"/>
+
+            <!-- Mouth -->
+            <path d="M148 232 Q160 242 172 232" fill="none" stroke="#c07060" stroke-width="2" stroke-linecap="round"/>
+            <path d="M152 232 Q160 237 168 232" fill="#e08878" opacity="0.6"/>
+
+            <!-- Small hair accessory - gold pin -->
+            <circle cx="197" cy="150" r="5" fill="#c9a84c"/>
+            <circle cx="197" cy="150" r="2.5" fill="#f0d080"/>
+            <line x1="197" y1="145" x2="197" y2="130" stroke="#c9a84c" stroke-width="1.5"/>
+
+            <!-- Name tag subtle -->
+            <text x="160" y="388" text-anchor="middle" font-family="serif" font-size="11" fill="#c9a84c" opacity="0.6" letter-spacing="3">張 煊 佩</text>
+          </g>
+        </svg>
         <div class="portrait-frame"></div>
       </div>
       <div>
