@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>自我介紹 | 張煊佩</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+TC:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --bg:        #0d0d0d;
+      --bg2:       #121212;
+      --surface:   #1a1a1a;
+      --border:    #2a2a2a;
+      --gold:      #c9a84c;
+      --gold-light:#e2c47a;
+      --text:      #e8e0d0;
+      --muted:     #888070;
+      --accent:    #c9a84c;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: .5;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(12px);
+      background: rgba(13,13,13,.7);
+      border-bottom: 1px solid var(--border);
+      transition: all .3s ease;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: .15em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .8rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      transition: color .3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width .3s ease;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 6rem 2rem 2rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,168,76,.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,.05) 0%, transparent 60%);
+    }
+    .hero-line {
+      position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 1px; background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
+      transform: translateX(-50%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 900px; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .hero-left { padding-right: 2rem; border-right: 1px solid var(--border); }
+    .hero-eyebrow {
+      font-size: .7rem; letter-spacing: .4em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp .8s ease .2s forwards;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp .8s ease .4s forwards;
+    }
+    .hero-name em {
+      font-style: italic; color: var(--gold);
+      display: block;
+    }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 300; font-style: italic;
+      color: var(--muted); margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp .8s ease .6s forwards;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: .8rem 2rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: .75rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      transition: all .3s;
+      opacity: 0; animation: fadeUp .8s ease .8s forwards;
+    }
+    .hero-cta:hover {
+      background: var(--gold); color: var(--bg);
+    }
+    .hero-right {
+      padding-left: 2rem;
+      opacity: 0; animation: fadeUp .8s ease .6s forwards;
+    }
+    .hero-intro-text {
+      font-size: 1rem; line-height: 2;
+      color: #b0a898;
+    }
+    .hero-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .stat-item { border-top: 1px solid var(--border); padding-top: 1rem; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; color: var(--gold); line-height: 1;
+    }
+    .stat-label {
+      font-size: .7rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: .3rem;
+    }
+
+    /* ── Section base ── */
+    section { padding: 8rem 4rem; max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: .65rem; letter-spacing: .5em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem; display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 3rem;
+      line-height: 1.2;
+    }
+    .divider {
+      width: 3rem; height: 1px;
+      background: var(--gold); margin: 1.5rem 0;
+    }
+
+    /* ── About ── */
+    #about { border-top: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+    .about-portrait {
+      position: relative; aspect-ratio: 4/5;
+    }
+    .portrait-placeholder {
+      width: 100%; height: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem;
+      color: var(--muted); font-size: .8rem;
+      letter-spacing: .15em;
+    }
+    .portrait-placeholder svg { opacity: .3; }
+    .portrait-frame {
+      position: absolute; top: 1.5rem; left: 1.5rem; right: -1.5rem; bottom: -1.5rem;
+      border: 1px solid var(--gold); opacity: .3;
+      pointer-events: none; z-index: -1;
+    }
+    .about-text p { margin-bottom: 1.5rem; color: #b0a898; font-size: .95rem; }
+    .highlight { color: var(--gold-light); }
+
+    /* ── Skills ── */
+    #skills { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 100%; }
+    .skills-inner { max-width: 1100px; margin: 0 auto; padding: 8rem 4rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 3rem; }
+    .skill-card {
+      background: var(--surface);
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      transition: border-color .3s, transform .3s;
+      position: relative; overflow: hidden;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .skill-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .skill-card:hover::before { transform: scaleX(1); }
+    .skill-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .skill-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; margin-bottom: .8rem; color: var(--text);
+    }
+    .skill-desc { font-size: .85rem; color: var(--muted); line-height: 1.7; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.2rem; }
+    .tag {
+      font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+      padding: .3rem .8rem; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 0;
+    }
+
+    /* ── Timeline ── */
+    #experience { border-top: 1px solid var(--border); }
+    .timeline { position: relative; margin-top: 3rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .tl-item { padding-left: 3rem; margin-bottom: 3.5rem; position: relative; }
+    .tl-dot {
+      position: absolute; left: -4px; top: .4rem;
+      width: 9px; height: 9px;
+      background: var(--gold); border-radius: 50%;
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--gold);
+    }
+    .tl-year { font-size: .7rem; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; margin-bottom: .5rem; }
+    .tl-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: .3rem; }
+    .tl-org { font-size: .85rem; color: var(--muted); margin-bottom: .8rem; }
+    .tl-desc { font-size: .9rem; color: #9a9080; line-height: 1.8; }
+
+    /* ── Contact ── */
+    #contact {
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .contact-inner { max-width: 600px; margin: 0 auto; }
+    .contact-lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-style: italic;
+      color: var(--muted); margin-bottom: 3rem;
+    }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .contact-btn {
+      display: flex; align-items: center; gap: .8rem;
+      padding: 1rem 2rem;
+      border: 1px solid var(--border);
+      color: var(--text); text-decoration: none;
+      font-size: .8rem; letter-spacing: .15em;
+      text-transform: uppercase;
+      transition: all .3s;
+    }
+    .contact-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .7rem; color: var(--muted); letter-spacing: .15em;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
+      .hero-right { padding-left: 0; }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-inner { padding: 5rem 1.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="nav-logo" href="#hero">H.P.</a>
+    <ul class="nav-links">
+      <li><a href="#about">關於我</a></li>
+      <li><a href="#skills">技能</a></li>
+      <li><a href="#experience">經歷</a></li>
+      <li><a href="#contact">聯絡</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-line"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <p class="hero-eyebrow">個人作品集 · Portfolio</p>
+        <h1 class="hero-name">
+          張煊佩
+          <em>Chang Hsuan-Pei</em>
+        </h1>
+        <p class="hero-subtitle">學生 · 靜宜大學</p>
+        <a class="hero-cta" href="#about">了解更多 ↓</a>
+      </div>
+      <div class="hero-right">
+        <p class="hero-intro-text">
+          熱衷於將創意與技術融合，打造有意義的數位體驗。<br><br>
+          對設計細節充滿熱情，相信每一個像素都有其存在的意義。
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">3+</div>
+            <div class="stat-label">年實務經驗</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">完成專案</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5</div>
+            <div class="stat-label">核心技能</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">學習熱忱</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-portrait reveal">
+        <div class="portrait-placeholder">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+          <span>您的照片</span>
+        </div>
+        <div class="portrait-frame"></div>
+      </div>
+      <div>
+        <span class="section-tag reveal">About Me</span>
+        <h2 class="section-title reveal">
+          關於<br><em style="font-family:'Playfair Display',serif; font-style:italic; color:var(--gold)">我自己</em>
+        </h2>
+        <div class="divider reveal"></div>
+        <div class="about-text reveal">
+          <p>我是<span class="highlight">張煊佩</span>，來自台灣的大學生，目前就讀於<span class="highlight">靜宜大學</span>。對資訊科技與數位設計懷有高度的熱忱，積極在學業中探索各種可能性。</p>
+          <p>在學期間積極參與各類<span class="highlight">專題競賽</span>與課外活動，累積了豐富的實作經驗。我深信良好的設計不僅美觀，更應該解決真實的問題。</p>
+          <p>業餘時間喜歡閱讀、創作文字，以及探索各種新技術。對於<span class="highlight">跨領域整合</span>有著濃厚的興趣。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <div id="skills">
+    <div class="skills-inner">
+      <span class="section-tag reveal">Skills</span>
+      <h2 class="section-title reveal">專業<em style="font-family:'Playfair Display',serif; font-style:italic; color:var(--gold)">技能</em></h2>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-icon">✦</div>
+          <div class="skill-name">前端開發</div>
+          <div class="skill-desc">熟悉現代前端框架與技術，能夠實現精緻的使用者介面與流暢的互動體驗。</div>
+          <div class="skill-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">◈</div>
+          <div class="skill-name">UI/UX 設計</div>
+          <div class="skill-desc">以使用者為中心的設計思維，從原型到成品，確保每個設計決策都有意義。</div>
+          <div class="skill-tags">
+            <span class="tag">Figma</span><span class="tag">Prototyping</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">◇</div>
+          <div class="skill-name">資料庫管理</div>
+          <div class="skill-desc">具備資料庫設計、正規化與查詢優化的能力，熟悉關聯式資料庫架構。</div>
+          <div class="skill-tags">
+            <span class="tag">SQL</span><span class="tag">MySQL</span><span class="tag">ERD</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">⬡</div>
+          <div class="skill-name">程式開發</div>
+          <div class="skill-desc">具備物件導向程式設計概念，能夠撰寫結構清晰、易於維護的程式碼。</div>
+          <div class="skill-tags">
+            <span class="tag">Python</span><span class="tag">Java</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">○</div>
+          <div class="skill-name">企業資訊系統</div>
+          <div class="skill-desc">了解企業架構與資訊系統規劃，具備 ERP 及資訊管理的理論與實務知識。</div>
+          <div class="skill-tags">
+            <span class="tag">ERP</span><span class="tag">BPM</span><span class="tag">EA</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">✧</div>
+          <div class="skill-name">文字創作</div>
+          <div class="skill-desc">擅長中文敘事寫作，能夠以文字構建氛圍，將複雜概念轉化為易讀的內容。</div>
+          <div class="skill-tags">
+            <span class="tag">繁體中文</span><span class="tag">敘事</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <section id="experience">
+    <span class="section-tag reveal">Experience</span>
+    <h2 class="section-title reveal">學習與<em style="font-family:'Playfair Display',serif; font-style:italic; color:var(--gold)">經歷</em></h2>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2024 — 現在</div>
+        <div class="tl-title">資訊管理學系</div>
+        <div class="tl-org">靜宜大學 · 台中</div>
+        <div class="tl-desc">主修商業資訊系統、資料庫管理、軟體工程等核心課程，積極參與課堂專題與競賽。</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023</div>
+        <div class="tl-title">前端開發自學</div>
+        <div class="tl-org">個人 · 線上課程</div>
+        <div class="tl-desc">系統性學習 HTML、CSS、JavaScript，建立多個個人作品，培養解決問題的能力。</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2022</div>
+        <div class="tl-title">高中畢業</div>
+        <div class="tl-org">某高中 · 台灣</div>
+        <div class="tl-desc">在學期間對資訊科技產生濃厚興趣，開始接觸程式設計與數位設計。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="contact-inner">
+      <span class="section-tag reveal">Contact</span>
+      <h2 class="section-title reveal">聯絡<em style="font-family:'Playfair Display',serif; font-style:italic; color:var(--gold)">我</em></h2>
+      <p class="contact-lead reveal">「每一次對話，都是一次新的可能性。」</p>
+      <div class="contact-links reveal">
+        <a class="contact-btn" href="mailto:your@email.com">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+        <a class="contact-btn" href="https://github.com/" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a class="contact-btn" href="https://linkedin.com/" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2025 張煊佩 · 版權所有</span>
+    <span>用心設計 · 用代碼實現</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.borderBottomColor =
+        window.scrollY > 50 ? 'rgba(201,168,76,.2)' : 'var(--border)';
+    });
+  </script>
+</body>
+</html>
